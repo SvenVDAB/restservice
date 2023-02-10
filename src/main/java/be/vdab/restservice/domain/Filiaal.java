@@ -1,17 +1,29 @@
 package be.vdab.restservice.domain;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "filialen")
-/*@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)*/
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Filiaal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id; private String naam;
+    private long id;
+    @NotBlank
+    private String naam;
+    @NotBlank
     private String gemeente;
+    @NotNull
+    @PositiveOrZero
     private BigDecimal omzet;
 
     protected Filiaal() {
@@ -37,5 +49,11 @@ public class Filiaal {
 
     public BigDecimal getOmzet() {
         return omzet;
+    }
+
+    public Filiaal withId(long id) {
+        var filiaalMetId = new Filiaal(naam, gemeente, omzet);
+        filiaalMetId.id = id;
+        return filiaalMetId;
     }
 }
