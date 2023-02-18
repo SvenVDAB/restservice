@@ -43,17 +43,6 @@ class FiliaalController {
                 links.linkToCollectionResource());
     }
 
-    /*
-        @GetMapping("{id}")
-        EntityModel<Filiaal> get(@PathVariable long id) {
-            return filiaalService.findById(id)
-                    .map(filiaal -> EntityModel.of(filiaal,
-                                    links.linkToItemResource(filiaal),
-                                    links.linkForItemResource(filiaal)
-                                            .slash("werknemers").withRel("werknemers")))
-                    .orElseThrow(FiliaalNietGevondenException::new);
-        }
-    */
     @GetMapping("{id}")
     @Operation(summary = "Een filiaal zoeken op id")
     EntityModel<Filiaal> get(@PathVariable long id) {
